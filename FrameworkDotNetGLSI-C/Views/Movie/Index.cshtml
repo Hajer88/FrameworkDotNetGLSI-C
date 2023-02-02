@@ -1,0 +1,11 @@
+﻿@model IEnumerable<FrameworkDotNetGLSI_C.Models.Movie>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@foreach(var item in Model)
+            {
+                <h2>@item.Title</h2>
+            }
+
