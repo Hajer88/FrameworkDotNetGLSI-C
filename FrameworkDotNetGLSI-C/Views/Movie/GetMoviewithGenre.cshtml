@@ -1,0 +1,23 @@
+﻿@model IEnumerable<FrameworkDotNetGLSI_C.Models.Movie>
+@{
+    ViewBag.Title = "GetMoviewithGenre";
+}
+
+<h2>Movies And Genres</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(c=>c.Title)</th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+            {
+        <tr><td>@item.Title</td>
+        <td>@item.genre.Name</td>
+        </tr>
+            }
+    </tbody>
+</table>
+

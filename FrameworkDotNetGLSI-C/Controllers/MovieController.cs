@@ -1,6 +1,7 @@
 ﻿using FrameworkDotNetGLSI_C.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,11 @@ namespace FrameworkDotNetGLSI_C.Controllers
 {
     public class MovieController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        public MovieController()
+        {
+            _context = new ApplicationDbContext();
+        }
         // GET: Movie
         public IEnumerable<Movie> getMovies()
         {
@@ -20,7 +26,7 @@ namespace FrameworkDotNetGLSI_C.Controllers
         }
         public ActionResult Index()
         {
-            var m = getMovies();
+            var m = _context.movies.ToList();
             
             return View(m);
         }
@@ -37,8 +43,14 @@ namespace FrameworkDotNetGLSI_C.Controllers
         }
         public ActionResult details(int id)
         {
-            var movieDetails = getMovies().First(c => c.Id == id);
+            var movieDetails = _context.movies.First(c => c.Id == id);
             return View(movieDetails);
+        }
+
+        public ActionResult GetMoviewithGenre()
+        {
+            var movie = _context.movies.Include(c=>c.genre).ToList();
+            return View(movie);
         }
       
     }
